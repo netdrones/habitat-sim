@@ -493,6 +493,9 @@ class HabitatSimInteractiveViewer(Application):
         return mouse_event_position * scaling
 
     def cycle_mouse_mode(self):
+        """
+        Cycles through mouse modes that belong to the MouseMode emun.
+        """
         self.mouse_interaction = MouseMode(
             (self.mouse_interaction.value + 1) % len(MouseMode)
         )
