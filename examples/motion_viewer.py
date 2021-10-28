@@ -104,7 +104,7 @@ class FairmotionSimInteractiveViewer(HabitatSimInteractiveViewer):
 
         elif key == pressed.M:
             # cycle through mouse modes
-            super().cycle_mouse_mode()
+            self.cycle_mouse_mode()
             logger.info(f"Command: mouse mode set to {self.mouse_interaction}")
             self.fm_demo.load_model()
             return
@@ -115,6 +115,14 @@ class FairmotionSimInteractiveViewer(HabitatSimInteractiveViewer):
             logger.info("Command: simulator re-loaded")
 
         super().key_press_event(event)
+
+    def cycle_mouse_mode(self):
+        """
+        Cycles through mouse modes that belong to the MouseMode emun.
+        """
+        self.mouse_interaction = MouseMode(
+            (self.mouse_interaction.value + 1) % len(MouseMode)
+        )
 
     def print_help_text(self) -> None:
         """
@@ -157,6 +165,7 @@ Key Commands:
 class MouseMode(Enum):
     LOOK = 0
     GRAB = 1
+    MOTION = 3
 
 
 if __name__ == "__main__":
